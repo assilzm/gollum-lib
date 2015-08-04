@@ -249,7 +249,7 @@ module Gollum
       @allow_uploads        = options.fetch :allow_uploads, false
       @per_page_uploads     = options.fetch :per_page_uploads, false
       @filter_chain         = options.fetch :filter_chain,
-                                            [:Metadata, :PlainText, :TOC, :RemoteCode, :Code, :Macro, :Sanitize, :WSD, :Tags, :Render]
+                                            [:Metadata, :PlainText, :TOC, :RemoteCode, :Code, :Macro, :Sanitize, :WSD, :Tags,:PlantUML, :Render]
 
     end
 
