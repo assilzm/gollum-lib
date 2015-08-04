@@ -89,7 +89,7 @@ module Gollum
     # name - name using the extension of the format
     #
     # Returns the processed data
-    def render_default(data, format=:markdown, name='render_default.md')
+    def render_default data, format=:markdown, name='render_default.md'
       # set instance vars so we're able to render data without a wiki or page.
       @format = format
       @name   = name
@@ -145,6 +145,7 @@ module Gollum
       @include_levels = include_levels
 
       data         = @data.dup
+      data       = process_graphviz(data) if @wiki.dot
       filter_chain = @wiki.filter_chain.map do |r|
         Gollum::Filter.const_get(r).new(self)
       end
@@ -157,6 +158,40 @@ module Gollum
       end
 
       process_chain data, filter_chain
+    end
+
+    #########################################################################
+    #
+    # Graphviz
+    #
+    #########################################################################
+
+    # Transform graphviz into img links.
+    #
+    # data - The raw String data.
+    #
+    # Returns the image linked String data.
+    def process_graphviz(data)
+      data.gsub(/\<graphviz\>\s*([\s\S]*?)\s*\<\/graphviz\>/m) do
+        id  = Digest::SHA1.hexdigest($1)
+
+        # Write graphviz graph to temp file
+        tmp = Tempfile.new ''
+        tmp.write $1
+        tmp.close
+
+        out_path_dir = ::File.expand_path ::File.join(@wiki.path, 'tmp')
+        Dir.mkdir out_path_dir unless ::File.exists? out_path_dir
+        out_path = ::File.join(out_path_dir, id)
+
+        system "#{@wiki.dot} -Tpng -o #{out_path}.png #{tmp.path}"
+
+        # Clean up tmp file
+        tmp.delete
+
+        # Replace graph with img link
+        %Q(<img alt="Graphviz image" src="/tmp/#{id}.png">)
+      end
     end
 
     # Find the given file in the repo.
