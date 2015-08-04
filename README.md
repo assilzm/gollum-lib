@@ -235,6 +235,19 @@ your changes merged back into core is as follows:
 1. Push the branch up to GitHub
 1. Send a pull request to the gollum/gollum-lib project.
 
+## use graphviz
+*checkout modified version gollum-lib from my github replace the origin one.*
+
+first install the graphvize
+```bash
+yum install 'graphviz*'
+```
+
+use the '--dot' argment to lunach gollum
+```bash
+gollum --dot /usr/bin/dot /wikidir/wiki
+```
+
 ## RELEASING
 
 Gollum-lib uses [Semantic Versioning](http://semver.org/). Having `x.y.z` :
