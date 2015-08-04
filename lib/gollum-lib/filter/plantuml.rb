@@ -2,7 +2,6 @@
 require 'net/http'
 require 'uri'
 require 'open-uri'
-require "tempfile"
 require File.expand_path '../../helpers', __FILE__
 
 # PlantUML Diagrams
