@@ -243,7 +243,7 @@ first install the graphvize
 yum install 'graphviz*'
 ```
 
-use the '--dot' argment to lunach gollum
+use the '--dot' argment to launch gollum
 ```bash
 gollum --dot /usr/bin/dot /wikidir/wiki
 ```
