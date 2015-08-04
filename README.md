@@ -235,7 +235,7 @@ your changes merged back into core is as follows:
 1. Push the branch up to GitHub
 1. Send a pull request to the gollum/gollum-lib project.
 
-## use graphviz
+## USE GRAPHVIZ
 *checkout modified version gollum-lib from my github replace the origin one.*
 
 first install the graphvize
@@ -247,6 +247,22 @@ use the '--dot' argment to launch gollum
 ```bash
 gollum --dot /usr/bin/dot /wikidir/wiki
 ```
+
+##USE PlantUML
+```
+digraph G {
+    main -> parse -> execute;
+    main -> init;
+    main -> cleanup;
+    execute -> make_string;
+    execute -> printf;
+    init -> make_string;
+    main -> printf;
+    execute -> compare;
+}
+```
+
+**PlantUML can support the graphviz format,so we can use plantuml instead graphviz.
 
 ## RELEASING
 
