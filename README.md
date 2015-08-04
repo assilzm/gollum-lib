@@ -262,7 +262,7 @@ digraph G {
 }
 ```
 
-**PlantUML can support the graphviz format,so we can use plantuml instead graphviz.
+**PlantUML can support the graphviz format,so we can use plantuml instead graphviz.**
 
 ## RELEASING
 
